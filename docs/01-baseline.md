@@ -162,3 +162,9 @@ Este documento representa o **estado inicial (baseline)** do ambiente antes da i
 ## Próxima etapa
 
 Configurar as permissões necessárias na AWS e preparar o Raspberry Pi 5 para enviar métricas ao **Amazon CloudWatch**.
+
+## 🔗 Navegação
+
+- [⬅️ README](../README.md)
+- [➡️ Próximo: IAM](./02-iam.md)
+- [📋 Encerramento do projeto](./06-encerramento.md)
