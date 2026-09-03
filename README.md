@@ -1,26 +1,25 @@
 # 🚀 Raspberry Pi 5 — Monitoramento e Troubleshooting com AWS CloudWatch
 
-Projeto prático de **Cloud / Infrastructure / DevOps**, utilizando um Raspberry Pi 5 como servidor real e o **Amazon CloudWatch** para monitoramento da infraestrutura.
+Projeto prático de **Cloud / Infrastructure / DevOps**, utilizando um Raspberry Pi 5 como servidor Linux real e o **Amazon CloudWatch** para monitoramento de métricas de infraestrutura.
 
-O projeto tem como objetivo acompanhar a saúde do servidor, identificar problemas e praticar processos de **monitoramento, troubleshooting e observabilidade** utilizando serviços da AWS.
+O projeto teve como objetivo praticar **AWS, Linux, IAM, AWS CLI, monitoramento e troubleshooting**, utilizando um ambiente físico real.
 
-> 🚧 **Projeto em desenvolvimento**
+> ✅ **Projeto concluído e encerrado**
 
 ---
 
 ## 🎯 Objetivo
 
-Construir uma solução de monitoramento para um Raspberry Pi 5, permitindo acompanhar remotamente:
+O objetivo foi configurar o Raspberry Pi 5 para enviar métricas básicas de infraestrutura para o **Amazon CloudWatch** utilizando o **CloudWatch Agent**.
+
+Foram monitorados:
 
 - 🖥️ CPU
 - 🧠 Memória RAM
-- 💾 Armazenamento
-- 🌡️ Temperatura
-- 🌐 Rede
-- 🐳 Containers Docker
-- ⚠️ Disponibilidade dos serviços
+- 💾 Disco interno
+- 💾 Disco externo
 
-As métricas serão enviadas para o **Amazon CloudWatch**, onde posteriormente serão utilizados dashboards e alarmes.
+O projeto também teve como foco a prática de troubleshooting durante a instalação e configuração.
 
 ---
 
@@ -29,59 +28,52 @@ As métricas serão enviadas para o **Amazon CloudWatch**, onde posteriormente s
 ```text
                     INTERNET
                         │
-                        │
-                ┌───────▼────────┐
-                │      AWS       │
-                │                │
-                │  CloudWatch    │
-                │                │
-                │  📊 Métricas   │
-                │  📈 Dashboard  │
-                │  🚨 Alarmes    │
-                └───────▲────────┘
-                        │
                         │ Métricas
-                        │
-                ┌───────┴────────┐
-                │  Raspberry Pi 5│
-                │                │
-                │   Debian 13    │
-                │     ARM64      │
-                │                │
-                │    Docker      │
-                │                │
-                │ ┌────────────┐ │
-                │ │ Jellyfin   │ │
-                │ │ Nginx      │ │
-                │ │ qBittorrent│ │
-                │ │ Navidrome  │ │
-                │ │ Cloudflare │ │
-                │ └────────────┘ │
-                └────────────────┘
+                        ▼
+                ┌─────────────────┐
+                │      AWS        │
+                │                 │
+                │   CloudWatch    │
+                │                 │
+                │    Namespace    │
+                │     CWAgent     │
+                └────────▲────────┘
+                         │
+                         │
+                ┌────────┴────────┐
+                │  Raspberry Pi 5 │
+                │                 │
+                │   Debian 13     │
+                │     ARM64       │
+                │                 │
+                │ CloudWatch Agent│
+                └─────────────────┘
 ```
 
 ---
 
 ## 🖥️ Ambiente
 
-| Componente          | Informação          |
-| ------------------- | ------------------- |
-| Hardware            | Raspberry Pi 5      |
-| Arquitetura         | ARM64 / aarch64     |
-| Sistema operacional | Debian GNU/Linux 13 |
-| Docker              | 29.7.2              |
-| AWS Region          | `us-east-1`         |
-| Monitoramento       | Amazon CloudWatch   |
+| Componente          | Informação                       |
+| ------------------- | -------------------------------- |
+| Hardware            | Raspberry Pi 5                   |
+| Arquitetura         | ARM64 / aarch64                  |
+| Sistema operacional | Debian GNU/Linux 13              |
+| CPU                 | 4 cores                          |
+| Memória             | ~7,9 GiB                         |
+| AWS Region          | `us-east-1`                      |
+| Monitoramento       | Amazon CloudWatch                |
+| Agent               | CloudWatch Agent 1.300072.0b1766 |
 
 ---
 
 # 📚 Documentação
 
-A implementação está sendo realizada por etapas.
+A implementação foi documentada em etapas.
 
 ### 01 — Baseline
 
-Levantamento inicial do servidor antes da implantação do monitoramento.
+Levantamento inicial do ambiente antes da implantação do monitoramento.
 
 **Status:** ✅ Concluído
 
@@ -91,9 +83,9 @@ Levantamento inicial do servidor antes da implantação do monitoramento.
 
 ### 02 — IAM
 
-Configuração das permissões necessárias para que o Raspberry Pi possa enviar métricas para o CloudWatch.
+Criação e configuração das permissões necessárias para permitir que o Raspberry Pi enviasse métricas para o CloudWatch.
 
-**Status:** ⬜ A fazer
+**Status:** ✅ Concluído
 
 👉 [🔐 Ver documentação do IAM](docs/02-iam.md)
 
@@ -101,9 +93,9 @@ Configuração das permissões necessárias para que o Raspberry Pi possa enviar
 
 ### 03 — CloudWatch Agent
 
-Instalação e configuração do CloudWatch Agent no Raspberry Pi.
+Instalação, configuração e validação do CloudWatch Agent no Raspberry Pi.
 
-**Status:** ⬜ A fazer
+**Status:** ✅ Concluído
 
 👉 [☁️ Ver documentação do CloudWatch Agent](docs/03-cloudwatch-agent.md)
 
@@ -111,71 +103,68 @@ Instalação e configuração do CloudWatch Agent no Raspberry Pi.
 
 ### 04 — Métricas
 
-Configuração das métricas que serão coletadas e enviadas para a AWS.
+Configuração e validação das métricas coletadas pelo CloudWatch Agent.
 
-**Status:** ⬜ A fazer
+**Status:** ✅ Concluído
 
 👉 [📈 Ver documentação das Métricas](docs/04-metrics.md)
 
 ---
 
-### 05 — Dashboard
+### 05 — Troubleshooting
 
-Criação de um dashboard no CloudWatch para visualizar o estado do servidor.
+Registro dos principais problemas encontrados durante a implementação e do processo utilizado para investigá-los e solucioná-los.
 
-**Status:** ⬜ A fazer
+**Status:** ✅ Concluído
 
-👉 [📊 Ver documentação do Dashboard](docs/05-dashboard.md)
-
----
-
-### 06 — Alarmes
-
-Configuração de alarmes para identificar situações anormais.
-
-**Status:** ⬜ A fazer
-
-👉 [🚨 Ver documentação dos Alarmes](docs/06-alarms.md)
+👉 [🔧 Ver documentação de Troubleshooting](docs/05-troubleshooting.md)
 
 ---
 
-### 07 — Troubleshooting
+### 06 — Encerramento e Aprendizados
 
-Documentação de problemas encontrados durante o projeto e os processos utilizados para investigá-los e solucioná-los.
+Registro do resultado final, limitações, decisões relacionadas a custos, aprendizados e encerramento dos recursos utilizados no projeto.
 
-**Status:** ⬜ A fazer
+**Status:** ✅ Concluído
 
-👉 [🔧 Ver documentação de Troubleshooting](docs/07-troubleshooting.md)
+👉 [📚 Ver documentação do Encerramento](docs/06-encerramento.md)
 
 ---
 
-# 📊 Métricas planejadas
+# 📊 Métricas monitoradas
 
-| Métrica     | Objetivo                                      |
-| ----------- | --------------------------------------------- |
-| CPU         | Identificar utilização elevada do processador |
-| RAM         | Identificar consumo excessivo de memória      |
-| Disco       | Acompanhar espaço disponível                  |
-| Temperatura | Monitorar temperatura do Raspberry Pi         |
-| Rede        | Acompanhar tráfego de rede                    |
-| Docker      | Verificar estado dos containers               |
+A configuração final do CloudWatch Agent coletava:
+
+| Métrica                           | Objetivo                           |
+| --------------------------------- | ---------------------------------- |
+| `cpu_usage_idle`                  | Acompanhar o uso da CPU            |
+| `mem_used_percent`                | Acompanhar o uso da memória        |
+| `disk_used_percent` `/`           | Acompanhar o armazenamento interno |
+| `disk_used_percent` `/mnt/wdblue` | Acompanhar o armazenamento externo |
+
+As métricas foram enviadas para o namespace:
+
+```text
+CWAgent
+```
 
 ---
 
 # 🔧 Troubleshooting
 
-O projeto também será utilizado para praticar troubleshooting em situações reais.
+Durante a implementação foram encontrados problemas reais que exigiram investigação.
 
-Alguns cenários planejados:
+Entre eles:
 
-- 🐳 Container Docker parado
-- 🔥 CPU com utilização elevada
-- 💾 Disco próximo da capacidade máxima
-- 🌐 Problema de conectividade
-- ❌ Serviço indisponível
-- 🐳 Investigação de consumo dos containers
+- configuração do Parameter Store;
+- problemas relacionados à obtenção de credenciais;
+- tentativa de acesso ao metadata service de EC2;
+- erro `AccessDenied` relacionado ao `cloudwatch:ListMetrics`;
+- identificação de métricas históricas;
+- validação da configuração do CloudWatch Agent;
+- análise dos logs do agente.
 
-Cada cenário será documentado seguindo o fluxo:
+O processo utilizado foi:
 
 ```text
 Problema
@@ -188,10 +177,60 @@ Identificação da causa
    ↓
 Correção
    ↓
+Teste
+   ↓
 Validação
    ↓
 Documentação
 ```
+
+---
+
+# 💰 Decisão sobre custos
+
+O projeto foi mantido propositalmente simples para evitar custos desnecessários.
+
+Não foram implementados:
+
+- CloudWatch Dashboard;
+- CloudWatch Alarms;
+- CloudWatch Logs para os logs do Raspberry Pi;
+- monitoramento de temperatura;
+- monitoramento de rede;
+- monitoramento de Docker pelo CloudWatch Agent;
+- Parameter Store;
+- infraestrutura como código.
+
+Após a validação do projeto, os recursos específicos utilizados para o monitoramento foram encerrados.
+
+---
+
+# 🧹 Encerramento
+
+Após a conclusão dos testes, o monitoramento foi encerrado.
+
+### AWS
+
+Foram removidos:
+
+- usuário IAM dedicado;
+- grupo IAM dedicado;
+- Access Key utilizada pelo Raspberry Pi.
+
+### Raspberry Pi
+
+Foram removidos:
+
+- CloudWatch Agent;
+- serviço do CloudWatch Agent;
+- configurações do agente;
+- logs do agente;
+- profile `AmazonCloudWatchAgent`;
+- credenciais relacionadas ao projeto.
+
+O profile `default` da AWS CLI foi preservado.
+
+As métricas históricas do namespace `CWAgent` permanecem no CloudWatch, mas o Raspberry Pi não envia mais novos dados.
 
 ---
 
@@ -202,83 +241,80 @@ raspberry-pi-cloudwatch-monitoring/
 │
 ├── README.md
 │
-├── docs/
-│   ├── 01-baseline.md
-│   ├── 02-iam.md
-│   ├── 03-cloudwatch-agent.md
-│   ├── 04-metrics.md
-│   ├── 05-dashboard.md
-│   ├── 06-alarms.md
-│   └── 07-troubleshooting.md
-│
-├── scripts/
-│   ├── system-info.sh
-│   ├── docker-health.sh
-│   └── monitoring.sh
-│
-├── cloudwatch/
-│   └── agent-config.json
-│
-├── troubleshooting/
-│   ├── README.md
-│   ├── 01-docker-container-down.md
-│   ├── 02-high-cpu.md
-│   ├── 03-disk-usage.md
-│   ├── 04-network-problem.md
-│   └── 05-service-unavailable.md
-│
-└── screenshots/
-    ├── 01-baseline/
-    ├── 02-cloudwatch/
-    ├── 03-dashboard/
-    └── 04-alarms/
+└── docs/
+    ├── 01-baseline.md
+    ├── 02-iam.md
+    ├── 03-cloudwatch-agent.md
+    ├── 04-metrics.md
+    ├── 05-troubleshooting.md
+    └── 06-encerramento.md
 ```
 
----
-
-# 🛣️ Roadmap
-
-- [x] Levantamento do ambiente
-- [x] Coleta do baseline
-- [ ] Configuração do IAM
-- [ ] Instalação do CloudWatch Agent
-- [ ] Configuração das métricas
-- [ ] Envio das métricas para o CloudWatch
-- [ ] Criação do Dashboard
-- [ ] Criação dos Alarmes
-- [ ] Testes de troubleshooting
-- [ ] Documentação dos incidentes
-- [ ] Revisão dos custos AWS
+A estrutura foi mantida simples porque o projeto não utilizou scripts ou infraestrutura como código.
 
 ---
 
-# 📚 Principais conhecimentos praticados
+# 🛣️ O que foi praticado
+
+Durante o projeto foram colocados em prática conhecimentos relacionados a:
 
 - Linux
-- Docker
 - AWS
 - IAM
+- AWS CLI
 - CloudWatch
+- CloudWatch Agent
 - Monitoramento
 - Observabilidade
 - Troubleshooting
+- Permissões
+- Logs
 - Infraestrutura
-- Redes
-- Análise de problemas
 
 ---
 
-## 👨‍💻 Sobre o projeto
+# 🎓 Principais aprendizados
 
-Este projeto está sendo desenvolvido como um laboratório prático para consolidar conhecimentos em **Cloud, Infrastructure e DevOps**.
+O projeto permitiu praticar não apenas a configuração do CloudWatch, mas também o processo de troubleshooting.
 
-O diferencial do projeto é utilizar um **servidor físico real (Raspberry Pi 5)** como ambiente de infraestrutura, realizando monitoramento, análise de métricas e troubleshooting.
+Foi necessário:
 
-Toda a implementação será documentada conforme o projeto evolui, incluindo decisões técnicas, problemas encontrados, comandos utilizados, resultados e evidências.
+- interpretar mensagens de erro;
+- analisar logs;
+- verificar permissões;
+- testar credenciais;
+- validar configurações;
+- analisar métricas;
+- diferenciar dados históricos de dados atuais;
+- considerar custos;
+- documentar problemas e soluções.
+
+O principal aprendizado foi entender que **troubleshooting envolve investigação e validação**, e não apenas execução de comandos.
 
 ---
 
-### 📚 Navegação
+# 🏁 Resultado
+
+O projeto atingiu seu objetivo principal:
+
+> Utilizar um servidor Linux físico real, o Raspberry Pi 5, para implementar e validar o envio de métricas de infraestrutura para o Amazon CloudWatch.
+
+Durante o período de funcionamento, foram coletadas métricas de:
+
+```text
+CPU
+Memória
+Disco /
+Disco /mnt/wdblue
+```
+
+O projeto também proporcionou experiência prática com **AWS IAM, AWS CLI, CloudWatch Agent, Linux, permissões, logs e troubleshooting**.
+
+> **Projeto concluído, documentado e encerrado.**
+
+---
+
+## 📚 Navegação
 
 🏠 **README**
 
@@ -290,8 +326,6 @@ Toda a implementação será documentada conforme o projeto evolui, incluindo de
 
 👉 [📈 Métricas](docs/04-metrics.md)
 
-👉 [📊 Dashboard](docs/05-dashboard.md)
+👉 [🔧 Troubleshooting](docs/05-troubleshooting.md)
 
-👉 [🚨 Alarmes](docs/06-alarms.md)
-
-👉 [🔧 Troubleshooting](docs/07-troubleshooting.md)
+👉 [📚 Encerramento e Aprendizados](docs/06-encerramento.md)
